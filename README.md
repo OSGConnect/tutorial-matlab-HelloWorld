@@ -14,7 +14,7 @@ In this tutorial, we learn the basics of compiling MATLAB program on a licensed 
 
 ## Compiling MATLAB on a machine with license 
 
-MATLAB compiler `mcc` allows one to create standalone binary from the MATLAB program. The standalone binary runs on a machine without license but the binary requires correct version of MATLAB runtime and operating system. The MATLAB runtime are available freely from MathWorks (http://www.mathworks.com/products/compiler/mcr/). The version of MATLAB runtime should match with the version of MATLAB compiler. OSG machines are based on linux, so it is required to compile MATLAB on linux machines.  
+MATLAB compiler `mcc` allows one to create standalone binary from the MATLAB program. The standalone binary runs on a machine without license but the binary requires correct version of MATLAB runtime and operating system. The MATLAB runtime are available freely from [MathWorks](http://www.mathworks.com/products/compiler/mcr/). The version of MATLAB runtime should match with the version of MATLAB compiler. OSG machines are based on linux, so it is required to compile MATLAB on linux machines.  
 
 ### MATLAB script - hello_world.m 
 
