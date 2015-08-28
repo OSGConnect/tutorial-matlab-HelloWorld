@@ -4,8 +4,9 @@
 ## Overview
 
 [MATLAB](http://www.mathworks.com/products/matlab/) is a proprietary software and requires license to run the applications.  However, compiled MATLAB binary does not require license.  The MATLAB programs are compiled by the MATLAB compiler `mcc`. The MATLAB compiler supports most of the toolboxes and user-developed 
-interfaces. For more details, check the list of supported toolboxes (http://www.mathworks.com/products/compiler/supported/compiler_support.html) and 
-ineligible programs (http://www.mathworks.com/products/ineligible_programs/). 
+interfaces. For more details, check the list 
+of [supported toolboxes](http://www.mathworks.com/products/compiler/supported/compiler_support.html) and 
+[ineligible programs](http://www.mathworks.com/products/ineligible_programs/). 
 
 In this tutorial, we learn the basics of compiling MATLAB program on a licensed machine and run the compiled binary on OSG connect. 
 
