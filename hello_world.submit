@@ -1,0 +1,14 @@
+Universe = vanilla  
+
+Executable =  run_hello_world.sh
+Arguments = /cvmfs/oasis.opensciencegrid.org/osg/modules/matlab/2014b/v84/ 
+transfer_input_files = hello_world 
+
+Output = Log/job.$(Process).out 
+Error =  Log/job.$(Process).err
+Log =    Log/job.$(Process).log
+
+requirements = HAS_CVMFS_oasis_opensciencegrid_org =?= True
+
+queue 1
+
