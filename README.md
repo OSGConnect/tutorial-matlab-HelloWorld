@@ -3,7 +3,7 @@
  
 ## Overview
 
-[MATLAB](http://www.mathworks.com/products/matlab/) is a licensed high level language and interactive modeling and development toolkit. The MATLAB Compiler™ lets you share MATLAB® programs as standalone applications.  All applications created with MATLAB Compiler use the [MATLAB Runtime](http://www.mathworks.com/products/compiler/mcr/), which enables royalty-free deployment and use.  
+[MATLAB](http://www.mathworks.com/products/matlab/) is a licensed high level language and interactive modeling and development toolkit. The [MATLAB Compiler™](http://www.mathworks.com/products/compiler/) lets you share MATLAB® programs as standalone applications.  All applications created with MATLAB Compiler use the [MATLAB Runtime](http://www.mathworks.com/products/compiler/mcr/), which enables royalty-free deployment and use.  
 
 MATLAB programs are compiled by the MATLAB Compiler `mcc`. The MATLAB compiler supports most of the toolboxes and user-developed  interfaces. For more details, check the list of [supported toolboxes](http://www.mathworks.com/products/compiler/supported/compiler_support.html) and 
 [ineligible programs](http://www.mathworks.com/products/ineligible_programs/). 
