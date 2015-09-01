@@ -3,22 +3,18 @@
  
 ## Overview
 
-[MATLAB](http://www.mathworks.com/products/matlab/) is a licensed high level language and interactive modeling and development environment. The MATLAB Compiler™ lets you share MATLAB® programs as standalone applications.  All applications created with MATLAB Compiler use the MATLAB Runtime, which is enables royalty-free deployment and use on OSG.  
+[MATLAB](http://www.mathworks.com/products/matlab/) is a licensed high level language and interactive modeling and development toolkit. The MATLAB Compiler™ lets you share MATLAB® programs as standalone applications.  All applications created with MATLAB Compiler use the [MATLAB Runtime](http://www.mathworks.com/products/compiler/mcr/), which enables royalty-free deployment and use.  
 
-MATLAB programs are compiled by the MATLAB compiler `mcc`. The MATLAB compiler supports most of the toolboxes and user-developed  interfaces. For more details, check the list of [supported toolboxes](http://www.mathworks.com/products/compiler/supported/compiler_support.html) and 
+MATLAB programs are compiled by the MATLAB Compiler `mcc`. The MATLAB compiler supports most of the toolboxes and user-developed  interfaces. For more details, check the list of [supported toolboxes](http://www.mathworks.com/products/compiler/supported/compiler_support.html) and 
 [ineligible programs](http://www.mathworks.com/products/ineligible_programs/). 
+
+OSG Connect has several MATLAB Compiler releases installed, and MATLAB Runtime is available on all OSG sites using the OASIS software service. 
 
 In this tutorial, we learn the basics of compiling a MATLAB program on a licensed machine and run the compiled binary on OSG.
 
-
-
-## Compiling MATLAB on a machine with license 
-
-MATLAB compiler `mcc` allows one to create standalone binary from the MATLAB program. The standalone binary runs on a machine without license but the binary requires correct version of MATLAB runtime and operating system. The MATLAB runtime are available freely from [MathWorks](http://www.mathworks.com/products/compiler/mcr/). The version of MATLAB runtime should match with the version of MATLAB compiler. OSG machines are based on linux, so it is required to compile MATLAB on linux machines.  
-
 ### MATLAB script - hello_world.m 
 
-Lets start with a simple MATLAB script `hello_world.m` that prints `hello world` to the standard output. 
+Lets start with a simple MATLAB script `hello_world.m` that prints `Hello World!` to standard output. 
     
     function helloworld
         fprintf('\n=============')
@@ -28,15 +24,11 @@ Lets start with a simple MATLAB script `hello_world.m` that prints `hello world`
 
 ### Compilation 
 
-On a machine with MATLAB license, invoke the compiler `mcc`. We turn off all graphical options (-nodisplay), disable Java (-nojvm), and 
-instruct MATLAB to run this application as a single-threaded application (-singleCompThread). 
+On a machine with MATLAB license, invoke the compiler `mcc`. We turn off all graphical options (-nodisplay), disable Java (-nojvm), and instruct MATLAB to run this application as a single-threaded application (-singleCompThread):
 
     mcc -m -R -singleCompThread -R -nodisplay -R -nojvm hello_world.m
 
-The flag -m means `c` language translation during compilation and the flag `-R`means runtime options.  The compilation would produce the 
-files: hello_world, run_hello_world.sh, mccExcludedFiles.log and readme.txt files.  The file `hello_world` is the compiled binary 
-file. "run_hello_world.sh" is the script file that executes the binary. `mccExcludedFiles.log` is the log file. `readme.txt` contains the 
-information about the compilation process. 
+The flag -m means `c` language translation during compilation and the flag `-R`means runtime options.  The compilation would produce the files: hello_world, run_hello_world.sh, mccExcludedFiles.log and readme.txt files.  The file `hello_world` is the compiled binary file. "run_hello_world.sh" is the script file that executes the binary. `mccExcludedFiles.log` is the log file. `readme.txt` contains the information about the compilation process. 
 
 
 ## Running the standalone binary applications on OSG
