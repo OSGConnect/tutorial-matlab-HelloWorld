@@ -34,7 +34,7 @@ The flag -m means C language translation during compilation, and the flag `-R` i
 
 The file `hello_world` is the compiled binary file. `run_hello_world.sh` is the script file that executes the binary. `mccExcludedFiles.log` is the log file and `readme.txt` contains the information about the compilation process. 
 
-## Running the standalone binary applications on OSG
+## Running standalone binary applications on OSG
 
 To see whats available on OSG:
 
@@ -63,7 +63,7 @@ This will create a directory `tutorial-matlab-HelloWorld`. Inside the directory,
     hello_world.submit      # condor job description file
     run_hello_world.sh      # execution script
 
-### Executing the MATLAB binary
+### Executing the MATLAB application binary
 
 The shell script `run_hello_world.sh` executes the binary `hello_world`. It takes the path of the MATLAB runtime as an 
 input argument. The supplied `hello_world` binary is compiled on a Linux machine with MATLAB 2015a. This means we need to have the same MATLAB Runtime to execute the binary. The MATLAB runtime for 2015a version is located in the path  `/cvmfs/oasis.opensciencegrid.org/osg/modules/matlab/2015a/v85/`
@@ -123,12 +123,12 @@ Now you have submitted the an ensemble of 10 MATLAB jobs printing `hello world` 
 	$ condor_q username  # The status of the job is printed on the screen. Here, username is your login name.
 
 
-### Job Outputs 
+### Job outputs 
 
 The `hello_world.m` script sends the output to standard output. In the condor job description file, we expressed that the standard output is written on the `Log/job.$(ProcessID).out`. After job completion, ten output files are produced with the `hello world` message under the directory `Log`. 
 
-## What next 
+## What's next? 
 Sure, it is not very exciting to print same message on 10 output files. In the subsequent MATLAB examples,  we see  how to scale up MATLAB computation on HTC environment. 
 
-## Getting Help
+## Getting help
 For assistance or questions, please email the OSG User Support team  at [user-support@opensciencegrid.org](mailto:user-support@opensciencegrid.org) or visit the [help desk and community forums](http://support.opensciencegrid.org).
