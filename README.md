@@ -12,7 +12,7 @@ OSG Connect has several MATLAB releases installed, and MATLAB Runtime is availab
 
 In this tutorial we learn the basics of compiling MATLAB programs on a licensed machine and running compiled binaries using MCR on the the OSG.
 
-### MATLAB script - hello_world.m 
+### MATLAB script: `hello_world.m` 
 
 Lets start with a simple MATLAB script `hello_world.m` that prints `Hello World!` to standard output. 
     
@@ -28,13 +28,15 @@ On a machine with MATLAB license, invoke the compiler `mcc`. We turn off all gra
 
     mcc -m -R -singleCompThread -R -nodisplay -R -nojvm hello_world.m
 
-The flag -m means `c` language translation during compilation and the flag `-R`means runtime options.  The compilation would produce the files: hello_world, run_hello_world.sh, mccExcludedFiles.log and readme.txt files.  The file `hello_world` is the compiled binary file. "run_hello_world.sh" is the script file that executes the binary. `mccExcludedFiles.log` is the log file. `readme.txt` contains the information about the compilation process. 
+The flag -m means C language translation during compilation, and the flag `-R` indicates runtime options.  The compilation would produce the files: 
 
+   `hello_world, run_hello_world.sh, mccExcludedFiles.log` and `readme.txt`
+
+The file `hello_world` is the compiled binary file. `run_hello_world.sh` is the script file that executes the binary. `mccExcludedFiles.log` is the log file and `readme.txt` contains the information about the compilation process. 
 
 ## Running the standalone binary applications on OSG
 
-MATLAB Runtime should be available on a machine to run the compiled binary applications. On OSG Connect, a few versions of MATLAB Runtime are available on OASIS as distributed environmental 
-modules. To see whats available on OSG:
+To see whats available on OSG:
 
     $ ssh username@login.osgconnect.net   # login on OSG connect login node
     $ module avail matlab
@@ -48,14 +50,10 @@ modules. To see whats available on OSG:
     Use "module spider" to find all possible modules.
     Use "module keyword key1 key2 ..." to search for all possible modules matching any of the "keys".
 
-The above listed matlab modules are the available MATLAB runtime on OSG Connect. Any standalone binary produced by above `mcc` version  should run on OSG Connect. 
 
 ### Tutorial files
 
-Let us say you have created the standalone binary `hello_world`. Transfer the files `hello_world` and `run_hello_world.sh` to the login.osgconnect.net. You may also use the readily available files on login.osgconnect.net via `tutorial` command. 
-
-
-In the command prompt, type 
+Let us say you have created the standalone binary `hello_world`. Transfer the files `hello_world` and `run_hello_world.sh` to login.osgconnect.net. You may also use the readily available files on login.osgconnect.net via `tutorial` command. 
 
 $ tutorial matlab-HelloWorld # Copies input and script files to the directory tutorial-matlab-HelloWorld.
  
@@ -64,11 +62,11 @@ This will create a directory `tutorial-matlab-HelloWorld`. Inside the directory,
     hello_world             # compiled executable binary of hello_world.m
     hello_world.submit      # condor job description file
     run_hello_world.sh      # execution script
+
 ### Executing the MATLAB binary
 
 The shell script `run_hello_world.sh` executes the binary `hello_world`. It takes the path of the MATLAB runtime as an 
-input argument. The supplied `hello_world` binary is compiled on linux machine with MATLAB 2015a. This means we need to have the same MATLAB 
-runtime to execute the binary. The MATLAB runtime for 2015a version is located in the path  `/cvmfs/oasis.opensciencegrid.org/osg/modules/matlab/2015a/v85/`
+input argument. The supplied `hello_world` binary is compiled on a Linux machine with MATLAB 2015a. This means we need to have the same MATLAB Runtime to execute the binary. The MATLAB runtime for 2015a version is located in the path  `/cvmfs/oasis.opensciencegrid.org/osg/modules/matlab/2015a/v85/`
 
 On the terminal prompt, type
 
@@ -106,8 +104,7 @@ Let us take a look at `hello_world.submit` file:
     queue 10                                     # Submit 10  jobs
 
 
-Before job submission, we need to make sure that the directory `Log` exists on the current working directory. Because HTcondor looks for 
-`Log` directory to copy the standard output, error and log files as specified in the job description file. 
+Before job submission, we need to make sure that the directory `Log` exists on the current working directory. Because HTcondor looks for `Log` directory to copy the standard output, error and log files as specified in the job description file. 
 
 From your work directory, type
 
@@ -116,7 +113,6 @@ From your work directory, type
 Absence of `Log` directory would send the jobs to held state. 
 
 ### Job submmision 
-
 
 We submit the job using `condor_submit` command as follows
 
