@@ -39,10 +39,10 @@ file. "run_hello_world.sh" is the script file that executes the binary. `mccExcl
 information about the compilation process. 
 
 
-## OSG Connect: Running the standalone binary applications
+## Running the standalone binary applications on OSG
 
-MATLAB runtime should be available on a machine to run the compiled binary applications. On OSG connect, a few versions of MATLAB runtime are available on OASIS as distributed environmental 
-modules. To see whats available on OSG connect
+MATLAB Runtime should be available on a machine to run the compiled binary applications. On OSG Connect, a few versions of MATLAB Runtime are available on OASIS as distributed environmental 
+modules. To see whats available on OSG:
 
     $ ssh username@login.osgconnect.net   # login on OSG connect login node
     $ module avail matlab
@@ -56,8 +56,7 @@ modules. To see whats available on OSG connect
     Use "module spider" to find all possible modules.
     Use "module keyword key1 key2 ..." to search for all possible modules matching any of the "keys".
 
-The above listed matlab modules are the available MATLAB runtime on OSG connect. Any standalone binary produced by above `mcc` version 
-should run on OSG connect. 
+The above listed matlab modules are the available MATLAB runtime on OSG Connect. Any standalone binary produced by above `mcc` version  should run on OSG Connect. 
 
 ### Tutorial files
 
