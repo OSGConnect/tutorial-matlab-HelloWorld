@@ -24,19 +24,19 @@ Lets start with a simple MATLAB script `hello_world.m` that prints `Hello World!
 
 ### Compilation 
 
-On a machine with MATLAB license, invoke the compiler `mcc`. We turn off all graphical options (-nodisplay), disable Java (-nojvm), and instruct MATLAB to run this application as a single-threaded application (-singleCompThread):
+On a machine with a MATLAB license, invoke the compiler `mcc`. We turn off all graphical options (`-nodisplay`), disable Java (`-nojvm`), and instruct MATLAB to run this application as a single-threaded application (`-singleCompThread`):
 
     mcc -m -R -singleCompThread -R -nodisplay -R -nojvm hello_world.m
 
-The flag -m means C language translation during compilation, and the flag `-R` indicates runtime options.  The compilation would produce the files: 
+The flag `-m` means C language translation during compilation, and the flag `-R` indicates runtime options.  The compilation would produce the files: 
 
    `hello_world, run_hello_world.sh, mccExcludedFiles.log` and `readme.txt`
 
-The file `hello_world` is the compiled binary file. `run_hello_world.sh` is the script file that executes the binary. `mccExcludedFiles.log` is the log file and `readme.txt` contains the information about the compilation process. 
+The file `hello_world` is the compiled binary file and `run_hello_world.sh` is the script file that executes the binary. `mccExcludedFiles.log` is the log file and `readme.txt` contains the information about the compilation process. 
 
 ## Running standalone binary applications on OSG
 
-To see whats available on OSG:
+To see which releases are available on OSG:
 
     $ ssh username@login.osgconnect.net   # login on OSG connect login node
     $ module avail matlab
@@ -53,7 +53,7 @@ To see whats available on OSG:
 
 ### Tutorial files
 
-Let us say you have created the standalone binary `hello_world`. Transfer the files `hello_world` and `run_hello_world.sh` to login.osgconnect.net. You may also use the readily available files on login.osgconnect.net via `tutorial` command. 
+Let us say you have created the standalone binary `hello_world`. Transfer the files `hello_world` and `run_hello_world.sh` to login.osgconnect.net. You may also use the readily available files on login.osgconnect.net via `tutorial` command: 
 
 $ tutorial matlab-HelloWorld # Copies input and script files to the directory tutorial-matlab-HelloWorld.
  
