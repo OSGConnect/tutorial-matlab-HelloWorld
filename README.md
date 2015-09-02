@@ -8,7 +8,7 @@
 MATLAB Compiler is invoked with `mcc`.  Most toolboxes and user-developed interfaces are supported. For more details, check the list of [supported toolboxes](http://www.mathworks.com/products/compiler/supported/compiler_support.html) and 
 [ineligible programs](http://www.mathworks.com/products/ineligible_programs/). 
 
-OSG Connect has several MATLAB releases installed, and MATLAB Runtime is available on all OSG sites using the OASIS software service using `module` commands. 
+OSG Connect has several MATLAB releases installed, and MATLAB Runtime is available on all OSG sites using the OASIS software service using `module` commands.
 
 In this tutorial we learn the basics of compiling MATLAB programs on a licensed machine and running compiled binaries using MCR on the the OSG.
 
