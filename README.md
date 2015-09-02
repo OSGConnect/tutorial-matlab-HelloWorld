@@ -66,11 +66,11 @@ This will create a directory `tutorial-matlab-HelloWorld`. Inside the directory,
 ### Executing the MATLAB application binary
 
 The shell script `run_hello_world.sh` executes the binary `hello_world`. It takes the path of the MATLAB runtime as an 
-input argument. The supplied `hello_world` binary is compiled on a Linux machine with MATLAB 2015a. This means we need to have the same MATLAB Runtime to execute the binary. The MATLAB runtime for 2015a version is located in the path  `/cvmfs/oasis.opensciencegrid.org/osg/modules/matlab/2015a/v85/`
+input argument. The supplied `hello_world` binary is compiled on a Linux machine with MATLAB 2015a. This means we need to have the same MATLAB Runtime to execute the binary. The MATLAB runtime for 2014b version is located in the path  `/cvmfs/oasis.opensciencegrid.org/osg/modules/matlab/2014b/v84/`
 
 On the terminal prompt, type
 
-    $ ./run_hello_world.sh /cvmfs/oasis.opensciencegrid.org/osg/modules/matlab/2015a/v85/
+    $ ./run_hello_world.sh /cvmfs/oasis.opensciencegrid.org/osg/modules/matlab/2014b/v84/
     (would produce the following output)
 
     ------------------------------------------
