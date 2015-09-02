@@ -1,4 +1,4 @@
-[title]: - "Basics of compiled MATLAB applications - Hello World example"
+[title]: - "Basics of compiled MATLAB applications - Hello World example"  
 [TOC]
  
 ## Overview
