@@ -76,6 +76,7 @@ On the terminal prompt, type
     $ module load matlab/2014b 
 
 now execute the binary
+
     $ ./hello_world
     (would produce the following output)
 
