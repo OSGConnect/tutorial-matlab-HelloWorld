@@ -33,7 +33,7 @@ The flag `-m` means C language translation during compilation, and the flag `-R`
 
    `hello_world, run_hello_world.sh, mccExcludedFiles.log` and `readme.txt`
 
-The file `hello_world` is the compiled binary file and `run_hello_world.sh` is the script file that executes the binary. `mccExcludedFiles.log` is the log file and `readme.txt` contains the information about the compilation process. 
+The file `hello_world` is the standalone executable. The file `run_hello_world.sh` is MATLAB generated shell script. `mccExcludedFiles.log` is the log file and `readme.txt` contains the information about the compilation process. We just need the standalone binary file `hello_world`. 
 
 ## Running standalone binary applications on OSG
 
@@ -62,23 +62,23 @@ This will create a directory `tutorial-matlab-HelloWorld`. Inside the directory,
    
     hello_world             # compiled executable binary of hello_world.m
     hello_world.submit      # condor job description file
-    run_hello_world.sh      # execution script
+    hello_world.sh      # execution script
+
+The `hello_world` is compiled using matlab/2014b. 
 
 ### Executing the MATLAB application binary
 
-The shell script `run_hello_world.sh` executes the binary `hello_world`. It takes the path of the MATLAB runtime as an 
-input argument. The supplied `hello_world` binary is compiled on a Linux machine with MATLAB 2015a. This means we need to have the same MATLAB Runtime to execute the binary. The MATLAB runtime for 2014b version is located in the path  `/cvmfs/oasis.opensciencegrid.org/osg/modules/matlab/2014b/v84/`
+The shell script `hello_world.sh` executes the binary `hello_world` that was  compiled on a Linux machine with MATLAB 2014b. This means we need 
+to have the same MATLAB Runtime to execute the binary. The MATLAB runtime for 2014b version is loaded into the path via module load command. 
 
 On the terminal prompt, type
 
-    $ ./run_hello_world.sh /cvmfs/oasis.opensciencegrid.org/osg/modules/matlab/2014b/v84/
+    $ module load matlab/2014b 
+
+now execute the binary
+    $ ./hello_world
     (would produce the following output)
 
-    ------------------------------------------
-    Setting up environment variables
-    ---
-    LD_LIBRARY_PATH is .:/cvmfs/oasis.opensciencegrid.org/osg/modules/matlab/2014b/v84//runtime/glnxa64:/cvmfs/oasis.opensciencegrid.org/osg/modules/matlab/2014b/v84//bin/glnxa64:/cvmfs/oasis.opensciencegrid.org/osg/modules/matlab/2014b/v84//sys/os/glnxa64:/cvmfs/oasis.opensciencegrid.org/osg/modules/matlab/2014b/v84//sys/opengl/lib/glnxa64
-    
     =============
     Hello, World!
     =============
@@ -92,8 +92,7 @@ Let us take a look at `hello_world.submit` file:
 
     Universe = vanilla                          # One OSG Connect vanilla, the preffered job universe is "vanilla"
 
-    Executable =  run_hello_world.sh    # Job execution file which is transffered to worker machine
-    Arguments = /cvmfs/oasis.opensciencegrid.org/osg/modules/matlab/2014b/v84/ # path of matlab runtime libraries 
+    Executable =  hello_world.sh    # Job execution file which is transffered to worker machine
     transfer_input_files = hello_world  # list of file(s) need be transffered to the remote worker machine 
 
     Output = Log/job.$(Process).out⋅            # standard output 
