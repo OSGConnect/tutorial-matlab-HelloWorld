@@ -31,9 +31,9 @@ On a machine with a MATLAB license, invoke the compiler `mcc`. We turn off all g
 
 The flag `-m` means C language translation during compilation, and the flag `-R` indicates runtime options.  The compilation would produce the files: 
 
-   `hello_world, run_hello_world.sh, mccExcludedFiles.log` and `readme.txt`
+   `hello_world, hello_world.sh, mccExcludedFiles.log` and `readme.txt`
 
-The file `hello_world` is the standalone executable. The file `run_hello_world.sh` is MATLAB generated shell script. `mccExcludedFiles.log` is the log file and `readme.txt` contains the information about the compilation process. We just need the standalone binary file `hello_world`. 
+The file `hello_world` is the standalone executable. The file `hello_world.sh` is MATLAB generated shell script. `mccExcludedFiles.log` is the log file and `readme.txt` contains the information about the compilation process. We just need the standalone binary file `hello_world`. 
 
 ## Running standalone binary applications on OSG
 
@@ -54,7 +54,8 @@ To see which releases are available on OSG:
 
 ### Tutorial files
 
-Let us say you have created the standalone binary `hello_world`. Transfer the files `hello_world` and `run_hello_world.sh` to login.osgconnect.net. You may also use the readily available files on login.osgconnect.net via `tutorial` command: 
+Let us say you have created the standalone binary `hello_world`. Transfer the file `hello_world` to login.osgconnect.net. Alternatively, you 
+may also use the readily available files on login.osgconnect.net via `tutorial` command: 
 
 $ tutorial matlab-HelloWorld # Copies input and script files to the directory tutorial-matlab-HelloWorld.
  
@@ -62,7 +63,7 @@ This will create a directory `tutorial-matlab-HelloWorld`. Inside the directory,
    
     hello_world             # compiled executable binary of hello_world.m
     hello_world.submit      # condor job description file
-    hello_world.sh      # execution script
+    hello_world.sh          # execution script
 
 The `hello_world` is compiled using matlab/2014b. 
 
@@ -75,7 +76,7 @@ On the terminal prompt, type
 
     $ module load matlab/2014b 
 
-now execute the binary
+The above command sets up the environment to run the matlab/2014b runtime applications.  Now execute the binary
 
     $ ./hello_world
     (would produce the following output)
@@ -93,8 +94,8 @@ Let us take a look at `hello_world.submit` file:
 
     Universe = vanilla                          # One OSG Connect vanilla, the preffered job universe is "vanilla"
 
-    Executable =  hello_world.sh    # Job execution file which is transffered to worker machine
-    transfer_input_files = hello_world  # list of file(s) need be transffered to the remote worker machine 
+    Executable =  hello_world.sh                # Job execution file which is transffered to worker machine
+    transfer_input_files = hello_world          # list of file(s) need be transffered to the remote worker machine 
 
     Output = Log/job.$(Process).out⋅            # standard output 
     Error =  Log/job.$(Process).err             # standard error
