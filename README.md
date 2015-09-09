@@ -42,7 +42,7 @@ To see which releases are available on OSG:
     $ ssh username@login.osgconnect.net   # login on OSG connect login node
     $ module avail matlab
     
-    --------------------------------- /cvmfs/oasis.opensciencegrid.org/osg/modules/modulefiles/Core -----------------------------------------
+    ----------- /cvmfs/oasis.opensciencegrid.org/osg/modules/modulefiles/Core ----------
     matlab/2013b    matlab/2014a    matlab/2014b    matlab/2015a (D)
 
     Where:
@@ -57,7 +57,7 @@ To see which releases are available on OSG:
 Let us say you have created the standalone binary `hello_world`. Transfer the file `hello_world` to login.osgconnect.net. Alternatively, you 
 may also use the readily available files on login.osgconnect.net via `tutorial` command: 
 
-$ tutorial matlab-HelloWorld # Copies input and script files to the directory tutorial-matlab-HelloWorld.
+    $ tutorial matlab-HelloWorld # Copies input and script files to the directory tutorial-matlab-HelloWorld.
  
 This will create a directory `tutorial-matlab-HelloWorld`. Inside the directory, you will see the following files
    
@@ -90,7 +90,15 @@ using HTcondor.
 
 ### Job execution and submission files
 
-Let us take a look at `hello_world.submit` file: 
+It is a good practice to prepare the execution of binary with a wrapper shell script. The script `hello_world.sh` is 
+
+    #!/bin/bash
+    source /cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/current/init/bash
+    module load matlab/2014b
+    chmod +x hello_world
+    ./hello_world
+
+Now we run the above wrapper script as condor job. Let us take a look at `hello_world.submit` file: 
 
     Universe = vanilla                          # One OSG Connect vanilla, the preffered job universe is "vanilla"
 
@@ -118,7 +126,7 @@ Absence of `Log` directory would send the jobs to held state.
 
 We submit the job using `condor_submit` command as follows
 
-	$ condor_submit hello_world.submit //Submit the condor job description file "wigner_distribution.submit"
+	$ condor_submit hello_world.submit //Submit the condor job description file "hello_world.submit"
 
 Now you have submitted the an ensemble of 10 MATLAB jobs printing `hello world` on the standard output. You can check the status of the submitted job by using the `condor_q` command as follows
 
