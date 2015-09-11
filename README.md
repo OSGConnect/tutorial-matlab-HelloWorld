@@ -31,9 +31,9 @@ On a machine with a MATLAB license, invoke the compiler `mcc`. We turn off all g
 
 The flag `-m` means C language translation during compilation, and the flag `-R` indicates runtime options.  The compilation would produce the files: 
 
-   `hello_world, hello_world.sh, mccExcludedFiles.log` and `readme.txt`
+   `hello_world, run_hello_world.sh, mccExcludedFiles.log` and `readme.txt`
 
-The file `hello_world` is the standalone executable. The file `hello_world.sh` is MATLAB generated shell script. `mccExcludedFiles.log` is the log file and `readme.txt` contains the information about the compilation process. We just need the standalone binary file `hello_world`. 
+The file `hello_world` is the standalone executable. The file `run_hello_world.sh` is MATLAB generated shell script. `mccExcludedFiles.log` is the log file and `readme.txt` contains the information about the compilation process. We just need the standalone binary file `hello_world`. 
 
 ## Running standalone binary applications on OSG
 
@@ -69,7 +69,7 @@ The `hello_world` is compiled using matlab/2014b.
 
 ### Executing the MATLAB application binary
 
-The shell script `hello_world.sh` executes the binary `hello_world` that was  compiled on a Linux machine with MATLAB 2014b. This means we need 
+The binary `hello_world` that was  compiled on a Linux machine with MATLAB 2014b. This means we need 
 to have the same MATLAB Runtime to execute the binary. The MATLAB runtime for 2014b version is loaded into the path via module load command. 
 
 On the terminal prompt, type
@@ -85,20 +85,11 @@ The above command sets up the environment to run the matlab/2014b runtime applic
     Hello, World!
     =============
 
-If you get the above output, the binary execution is successful. Next, we see how we submit the job to a remote worker machine 
-using HTcondor. 
+If you get the above output, the binary execution is successful. Next, we see how we submit the job to a remote worker machine using HTcondor. 
 
 ### Job execution and submission files
 
-It is a good practice to prepare the execution of binary with a wrapper shell script. The script `hello_world.sh` is 
-
-    #!/bin/bash
-    source /cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/current/init/bash
-    module load matlab/2014b
-    chmod +x hello_world
-    ./hello_world
-
-Now we run the above wrapper script as condor job. Let us take a look at `hello_world.submit` file: 
+Let us take a look at `hello_world.submit` file: 
 
     Universe = vanilla                          # One OSG Connect vanilla, the preffered job universe is "vanilla"
 
@@ -114,7 +105,17 @@ Now we run the above wrapper script as condor job. Let us take a look at `hello_
     queue 10                                     # Submit 10  jobs
 
 
-Before job submission, we need to make sure that the directory `Log` exists on the current working directory. Because HTcondor looks for `Log` directory to copy the standard output, error and log files as specified in the job description file. 
+The script `hello_world.sh`  
+
+    #!/bin/bash
+    source /cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/current/init/bash
+    module load matlab/2014b
+    chmod +x hello_world
+    ./hello_world
+
+loads the correct matlab module and executes the binary. 
+
+Before we submit the job, make sure that the directory `Log` exists on the current working directory. Because HTcondor looks for `Log` directory to copy the standard output, error and log files as specified in the job description file. 
 
 From your work directory, type
 
