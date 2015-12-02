@@ -4,14 +4,14 @@
  
 ## Overview
 
-[MATLAB®](http://www.mathworks.com/products/matlab/) is a licensed high level language and interactive modeling and development toolkit. The [MATLAB Compiler™](http://www.mathworks.com/products/compiler/) lets you share MATLAB programs as standalone applications.  All applications created with MATLAB Compiler use [MATLAB Runtime™ (MCR)](http://www.mathworks.com/products/compiler/mcr/), which enables royalty-free deployment and use.  
+[MATLAB®](http://www.mathworks.com/products/matlab/) is a licensed high level language and modeling toolkit. The [MATLAB Compiler™](http://www.mathworks.com/products/compiler/) lets you share MATLAB programs as standalone applications.  All applications created with MATLAB Compiler use [MATLAB Compiler Runtime™ (MCR)](http://www.mathworks.com/products/compiler/mcr/), which enables royalty-free deployment and use.  
 
 MATLAB Compiler is invoked with `mcc`.  Most toolboxes and user-developed interfaces are supported. For more details, check the list of [supported toolboxes](http://www.mathworks.com/products/compiler/supported/compiler_support.html) and 
-[ineligible programs](http://www.mathworks.com/products/ineligible_programs/). 
+[ineligible programs](http://www.mathworks.com/products/ineligible_programs/).  MATLAB Compiler Runtime is 
+available on OSG Connect.  
 
-OSG Connect has several MATLAB releases installed, and MATLAB Runtime is available on all OSG sites using the OASIS software service using `module` commands.
-
-In this tutorial we learn the basics of compiling MATLAB programs on a licensed machine and running compiled binaries using MCR on the the OSG.
+In this tutorial, we learn the basics of compiling 
+MATLAB programs on a licensed machine and running compiled binaries using MCR on the OSG. 
 
 ### MATLAB script: `hello_world.m` 
 
@@ -31,7 +31,7 @@ On a machine with a MATLAB license, invoke the compiler `mcc`. We turn off all g
 
 The flag `-m` means C language translation during compilation, and the flag `-R` indicates runtime options.  The compilation would produce the files: 
 
-   `hello_world, run_hello_world.sh, mccExcludedFiles.log` and `readme.txt`
+    `hello_world, run_hello_world.sh, mccExcludedFiles.log` and `readme.txt`
 
 The file `hello_world` is the standalone executable. The file `run_hello_world.sh` is MATLAB generated shell script. `mccExcludedFiles.log` is the log file and `readme.txt` contains the information about the compilation process. We just need the standalone binary file `hello_world`. 
 
@@ -54,25 +54,23 @@ To see which releases are available on OSG:
 
 ### Tutorial files
 
-Let us say you have created the standalone binary `hello_world`. Transfer the file `hello_world` to login.osgconnect.net. Alternatively, you 
-may also use the readily available files on login.osgconnect.net via `tutorial` command: 
+Let us say you have created the standalone binary `hello_world`. Transfer the file `hello_world` to login.osgconnect.net. Alternatively, you may also use the readily available files by invoking the `tutorial` command: 
+
 
     $ tutorial matlab-HelloWorld # Copies input and script files to the directory tutorial-matlab-HelloWorld.
  
 This will create a directory `tutorial-matlab-HelloWorld`. Inside the directory, you will see the following files
    
     hello_world             # compiled executable binary of hello_world.m
+    hello_world.m           # matlab program
     hello_world.submit      # condor job description file
     hello_world.sh          # execution script
 
-The `hello_world` is compiled using matlab/2014b. 
-
 ### Executing the MATLAB application binary
 
-The binary `hello_world` that was  compiled on a Linux machine with MATLAB 2014b. This means we need 
-to have the same MATLAB Runtime to execute the binary. The MATLAB runtime for 2014b version is loaded into the path via module load command. 
+The compilation and execution environment need to the same. The file `hello_world` is a standalone binary of the matlab program `hello_world.m` which was compiled using MATLAB 2014b on a Linux platform. The login node and many of the worker nodes on OSG are based on Linux platform. In addition to the platform requirement, we also need to have the same MATLAB Runtime version. 
 
-On the terminal prompt, type
+Load the MATLAB runtime for 2014b version via module command.  On the terminal prompt, type
 
     $ module load matlab/2014b 
 
@@ -85,11 +83,12 @@ The above command sets up the environment to run the matlab/2014b runtime applic
     Hello, World!
     =============
 
-If you get the above output, the binary execution is successful. Next, we see how we submit the job to a remote worker machine using HTcondor. 
+If you get the above output, the binary execution is successful. Next, we see how to submit the job on a remote worker machine using HTcondor. 
 
 ### Job execution and submission files
 
 Let us take a look at `hello_world.submit` file: 
+
 
     Universe = vanilla                          # One OSG Connect vanilla, the preffered job universe is "vanilla"
 
@@ -105,7 +104,7 @@ Let us take a look at `hello_world.submit` file:
     queue 10                                     # Submit 10  jobs
 
 
-The script `hello_world.sh`  
+The wrapper script `hello_world.sh`  
 
     #!/bin/bash
     source /cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/current/init/bash
@@ -125,11 +124,12 @@ Absence of `Log` directory would send the jobs to held state.
 
 ### Job submmision 
 
-We submit the job using `condor_submit` command as follows
+We submit the job using the `condor_submit` command as follows
 
 	$ condor_submit hello_world.submit //Submit the condor job description file "hello_world.submit"
 
-Now you have submitted the an ensemble of 10 MATLAB jobs printing `hello world` on the standard output. You can check the status of the submitted job by using the `condor_q` command as follows
+Now you have submitted an ensemble of 10 MATLAB jobs. Each job prints `hello world` on the standard 
+output. Check the status of the submitted job,  
 
 	$ condor_q username  # The status of the job is printed on the screen. Here, username is your login name.
 
@@ -139,7 +139,8 @@ Now you have submitted the an ensemble of 10 MATLAB jobs printing `hello world` 
 The `hello_world.m` script sends the output to standard output. In the condor job description file, we expressed that the standard output is written on the `Log/job.$(ProcessID).out`. After job completion, ten output files are produced with the `hello world` message under the directory `Log`. 
 
 ## What's next? 
-Sure, it is not very exciting to print same message on 10 output files. In the subsequent MATLAB examples,  we see  how to scale up MATLAB computation on HTC environment. 
+Sure, it is not very exciting to print the same message on 10 output files. In the subsequent MATLAB 
+examples,  we see  how to scale up MATLAB computation on HTC environment. 
 
 ## Getting help
 For assistance or questions, please email the OSG User Support team  at [user-support@opensciencegrid.org](mailto:user-support@opensciencegrid.org) or visit the [help desk and community forums](http://support.opensciencegrid.org).
