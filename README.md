@@ -4,14 +4,16 @@
  
 ## Overview
 
-[MATLAB®](http://www.mathworks.com/products/matlab/) is a licensed high level language and modeling toolkit. The [MATLAB Compiler™](http://www.mathworks.com/products/compiler/) lets you share MATLAB programs as standalone applications.  All applications created with MATLAB Compiler use [MATLAB Compiler Runtime™ (MCR)](http://www.mathworks.com/products/compiler/mcr/), which enables royalty-free deployment and use.  
+[MATLAB®](http://www.mathworks.com/products/matlab/) is a licensed high level language and modeling toolkit. The [MATLAB Compiler™](http://www.mathworks.com/products/compiler/) lets you share MATLAB programs as standalone applications.  MATLAB Compiler is invoked with `mcc`. The compiler supports most toolboxes and user-developed 
+interfaces. For more details, check the list of [supported toolboxes](http://www.mathworks.com/products/compiler/supported/compiler_support.html) 
+and [ineligible programs](http://www.mathworks.com/products/ineligible_programs/).  
 
-MATLAB Compiler is invoked with `mcc`.  Most toolboxes and user-developed interfaces are supported. For more details, check the list of [supported toolboxes](http://www.mathworks.com/products/compiler/supported/compiler_support.html) and 
-[ineligible programs](http://www.mathworks.com/products/ineligible_programs/).  MATLAB Compiler Runtime is 
-available on OSG Connect.  
 
-In this tutorial, we learn the basics of compiling 
-MATLAB programs on a licensed machine and running compiled binaries using MCR on the OSG. 
+All applications created with MATLAB Compiler use [MATLAB Compiler Runtime™ (MCR)](http://www.mathworks.com/products/compiler/mcr/), which enables royalty-free deployment and use. We assume you have access to a machine that has MATLAB compiler because the compiler is not available on OSG Connect.  MATLAB Runtime is available 
+on OSG Connect. 
+
+In this tutorial, we learn the basics of compiling MATLAB programs on a licensed linux machine and 
+running the compiled binaries using MCR on the OSG machines. 
 
 ### MATLAB script: `hello_world.m` 
 
@@ -25,7 +27,8 @@ Lets start with a simple MATLAB script `hello_world.m` that prints `Hello World!
 
 ### Compilation 
 
-On a machine with a MATLAB license, invoke the compiler `mcc`. We turn off all graphical options (`-nodisplay`), disable Java (`-nojvm`), and instruct MATLAB to run this application as a single-threaded application (`-singleCompThread`):
+OSG connect does not have a license to use the MATLAB compiler. On a Linux machine with a MATLAB 
+license, invoke the compiler `mcc`.  We turn off all graphical options (`-nodisplay`), disable Java (`-nojvm`), and instruct MATLAB to run this application as a single-threaded application (`-singleCompThread`):
 
     mcc -m -R -singleCompThread -R -nodisplay -R -nojvm hello_world.m
 
