@@ -12,8 +12,13 @@ and [ineligible programs](http://www.mathworks.com/products/ineligible_programs/
 All applications created with MATLAB Compiler use [MATLAB Compiler Runtime™ (MCR)](http://www.mathworks.com/products/compiler/mcr/), which enables royalty-free deployment and use. We assume you have access to a machine that has MATLAB compiler because the compiler is not available on OSG Connect.  MATLAB Runtime is available 
 on OSG Connect. 
 
-In this tutorial, we learn the basics of compiling MATLAB programs on a licensed linux machine and 
-running the compiled binaries using MCR on the OSG machines. 
+ Although the compiled binaries are portable, they need to match on the operating system and matlab version. We recommend the 
+compilation of the program with matlab versions 2014a, 2014b, 2015a, or 2015b and on machines with 
+Scientific Linux version 5, 6 or 7. 
+
+In this tutorial, we learn the basics of compiling MATLAB programs on a licensed linux machine and running the 
+compiled binaries using MCR on the OSG machines. 
+
 
 ### MATLAB script: `hello_world.m` 
 
