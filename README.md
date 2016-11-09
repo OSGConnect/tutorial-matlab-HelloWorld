@@ -107,9 +107,8 @@ Let us take a look at `hello_world.submit` file:
     Output = Log/job.$(Process).out⋅            # standard output 
     Error =  Log/job.$(Process).err             # standard error
     Log =    Log/job.$(Process).log             # log information about job execution
-
-    requirements = HAS_CVMFS_oasis_opensciencegrid_org =?= True   # Check if the worker machine has CVMFS 
-
+    
+    requirements = OSGVO_OS_STRING == "RHEL 6" && Arch == "X86_64" && HAS_MODULES == True 
     queue 10                                     # Submit 10  jobs
 
 
