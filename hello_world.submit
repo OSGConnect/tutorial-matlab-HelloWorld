@@ -7,6 +7,6 @@ Output = Log/job.$(Process).out
 Error =  Log/job.$(Process).err
 Log =    Log/job.$(Process).log
 
-requirements =  Arch == "X86_64" && HAS_MODULES == True
+requirements =  OSGVO_OS_STRING == "RHEL 7" && Arch == "X86_64" && HAS_MODULES == True
 queue 10
 

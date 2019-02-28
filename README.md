@@ -49,16 +49,13 @@ The file `hello_world` is the standalone executable. The file `run_hello_world.s
 To see which releases are available on OSG:
 
     $ ssh username@login.osgconnect.net   # login on OSG connect login node
-    $ module avail matlab
-    
-    ----------- /cvmfs/oasis.opensciencegrid.org/osg/modules/modulefiles/Core ----------
-    matlab/2013b    matlab/2014a    matlab/2014b    matlab/2015a (D)
+    $ module spider matlab
 
-    Where:
-     (D):  Default Module
+    -------------------------------------------------------
+     matlab: matlab/R2018b
+    -------------------------------------------------------
 
-    Use "module spider" to find all possible modules.
-    Use "module keyword key1 key2 ..." to search for all possible modules matching any of the "keys".
+    This module can be loaded directly: module load matlab/R2018b
 
 
 ### Tutorial files
@@ -81,7 +78,7 @@ The compilation and execution environment need to the same. The file `hello_worl
 
 Load the MATLAB runtime for 2014b version via module command.  On the terminal prompt, type
 
-    $ module load matlab/2014b 
+    $ module load matlab/R2018b
 
 The above command sets up the environment to run the matlab/2014b runtime applications.  Now execute the binary
 
@@ -108,15 +105,15 @@ Let us take a look at `hello_world.submit` file:
     Error =  Log/job.$(Process).err             # standard error
     Log =    Log/job.$(Process).log             # log information about job execution
     
-    requirements = OSGVO_OS_STRING == "RHEL 6" && Arch == "X86_64" && HAS_MODULES == True 
+    requirements = OSGVO_OS_STRING == "RHEL 7" && Arch == "X86_64" && HAS_MODULES == True 
     queue 10                                     # Submit 10  jobs
 
 
 The wrapper script `hello_world.sh`  
 
     #!/bin/bash
-    source /cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/current/init/bash
-    module load matlab/2014b
+    set -e
+    module load matlab/R2018b
     chmod +x hello_world
     ./hello_world
 
