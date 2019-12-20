@@ -148,4 +148,4 @@ Sure, it is not very exciting to print the same message on 10 output files. In t
 examples,  we see  how to scale up MATLAB computation on HTC environment. 
 
 ## Getting help
-For assistance or questions, please email the OSG User Support team  at [user-support@opensciencegrid.org](mailto:user-support@opensciencegrid.org) or visit the [help desk and community forums](http://support.opensciencegrid.org).
+For assistance or questions, please email the OSG User Support team  at [support@opensciencegrid.org](mailto:support@opensciencegrid.org) or visit the [help desk and community forums](http://support.opensciencegrid.org).
