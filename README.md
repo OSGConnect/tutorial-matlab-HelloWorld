@@ -9,16 +9,15 @@ interfaces. For more details, check the list of [supported toolboxes](http://www
 and [ineligible programs](http://www.mathworks.com/products/ineligible_programs/).  
 
 
-All applications created with MATLAB Compiler use [MATLAB Compiler Runtime™ (MCR)](http://www.mathworks.com/products/compiler/mcr/), which enables royalty-free deployment and use. We assume you have access to a machine that has MATLAB compiler because the compiler is not available on OSG Connect.  MATLAB Runtime is available 
+All applications created with MATLAB Compiler use [MATLAB Compiler Runtime™ (MCR)](http://www.mathworks.com/products/compiler/mcr/), which enables royalty-free deployment and use. We assume you have access to a server that has MATLAB compiler because the compiler is not available on OSG Connect.  MATLAB Runtime is available 
 on OSG Connect. 
 
-Although the compiled binaries are portable, they need to have a compatible execution environment in terms of the 
-operating system and matlab version. We recommend the 
-compilation of the program with matlab versions 2014a, 2014b, 2015a, or 2015b and on machines with 
-Scientific Linux version 5, 6 or 7 so that the compiled binaries are portable on OSG machines.  
+Although the compiled binaries are portable, they need to have a compatible, OS-specific matlab runtime to interpret the binary. We recommend the 
+compilation of your matlab program against matlab versions that match the OSG modules (or [containers](https://support.opensciencegrid.org/support/solutions/articles/12000073449-available-containers-list), with the compilation executed on a server with 
+Scientific Linux version 7 so that the compiled binaries are portable on OSG machines.
 
 In this tutorial, we learn the basics of compiling MATLAB programs on a licensed linux machine and running the 
-compiled binaries using MCR on the OSG machines. 
+compiled binaries using a matlab compiled runtime (MCR) in the OSG modules or containers. 
 
 
 ### MATLAB script: `hello_world.m` 
@@ -33,7 +32,7 @@ Lets start with a simple MATLAB script `hello_world.m` that prints `Hello World!
 
 ### Compilation 
 
-OSG connect does not have a license to use the MATLAB compiler. On a Linux machine with a MATLAB 
+*OSG connect does not have a license to use the MATLAB compiler*. On a Linux server with a MATLAB 
 license, invoke the compiler `mcc`.  We turn off all graphical options (`-nodisplay`), disable Java (`-nojvm`), and instruct MATLAB to run this application as a single-threaded application (`-singleCompThread`):
 
     mcc -m -R -singleCompThread -R -nodisplay -R -nojvm hello_world.m
@@ -74,13 +73,13 @@ This will create a directory `tutorial-matlab-HelloWorld`. Inside the directory,
 
 ### Executing the MATLAB application binary
 
-The compilation and execution environment need to the same. The file `hello_world` is a standalone binary of the matlab program `hello_world.m` which was compiled using MATLAB 2014b on a Linux platform. The login node and many of the worker nodes on OSG are based on Linux platform. In addition to the platform requirement, we also need to have the same MATLAB Runtime version. 
+The compilation and execution environment need to the same. The file `hello_world` is a standalone binary of the matlab program `hello_world.m` which was compiled using MATLAB 2018b on a Linux platform. The login node and many of the worker nodes on OSG are based on Linux platform. In addition to the platform requirement, we also need to have the same MATLAB Runtime version. 
 
-Load the MATLAB runtime for 2014b version via module command.  On the terminal prompt, type
+Load the MATLAB runtime for 2018b version via module command.  On the terminal prompt, type
 
     $ module load matlab/R2018b
 
-The above command sets up the environment to run the matlab/2014b runtime applications.  Now execute the binary
+The above command sets up the environment to run the matlab/2018b runtime applications.  Now execute the binary
 
     $ ./hello_world
     (would produce the following output)
@@ -89,7 +88,7 @@ The above command sets up the environment to run the matlab/2014b runtime applic
     Hello, World!
     =============
 
-If you get the above output, the binary execution is successful. Next, we see how to submit the job on a remote worker machine using HTcondor. 
+If you get the above output, the binary execution is successful. Next, we see how to submit the job on a remote execute point using HTcondor. 
 
 ### Job execution and submission files
 
@@ -98,8 +97,8 @@ Let us take a look at `hello_world.submit` file:
 
     Universe = vanilla                          # One OSG Connect vanilla, the preffered job universe is "vanilla"
 
-    Executable =  hello_world.sh                # Job execution file which is transffered to worker machine
-    transfer_input_files = hello_world          # list of file(s) need be transffered to the remote worker machine 
+    Executable =  hello_world.sh                # Job execution file which is transfered to execute point
+    transfer_input_files = hello_world          # list of file(s) need be transffered to the remote execute point 
 
     Output = Log/job.$(Process).out⋅            # standard output 
     Error =  Log/job.$(Process).err             # standard error
@@ -117,7 +116,7 @@ The wrapper script `hello_world.sh`
     chmod +x hello_world
     ./hello_world
 
-loads the correct matlab module and executes the binary. 
+loads the correct matlab module and executes the binary. If you are using an OSG-supported Matlab [container](https://support.opensciencegrid.org/support/solutions/articles/12000073449-available-containers-list), you don't need the `module load` command.
 
 Before we submit the job, make sure that the directory `Log` exists on the current working directory. Because HTcondor looks for `Log` directory to copy the standard output, error and log files as specified in the job description file. 
 
