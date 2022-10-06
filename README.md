@@ -1,8 +1,9 @@
-[title]: - "Basics of compiled MATLAB applications - Hello World example"  
-[TOC]
+---
+ospool:
+    path: software_examples/matlab_runtime/tutorial-matlab-HelloWorld/README.md
+---
  
- 
-## Overview
+# Basics of compiled MATLAB applications - Hello World example
 
 [MATLAB®](http://www.mathworks.com/products/matlab/) is a licensed high level language and modeling toolkit. The [MATLAB Compiler™](http://www.mathworks.com/products/compiler/) lets you share MATLAB programs as standalone applications.  MATLAB Compiler is invoked with `mcc`. The compiler supports most toolboxes and user-developed 
 interfaces. For more details, check the list of [supported toolboxes](http://www.mathworks.com/products/compiler/supported/compiler_support.html) 
