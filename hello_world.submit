@@ -1,12 +1,11 @@
-Universe = vanilla
+universe = vanilla
++SingularityImage = "/cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-matlab-runtime:R2018b"
 
-Executable =  hello_world.sh
-transfer_input_files = hello_world
+executable =  hello_world
 
 Output = Log/job.$(Process).out 
 Error =  Log/job.$(Process).err
 Log =    Log/job.$(Process).log
 
-requirements =  OSGVO_OS_STRING == "RHEL 7" && Arch == "X86_64" && HAS_MODULES == True
+requirements = HAS_SINGULARITY == TRUE
 queue 10
-
