@@ -14,11 +14,11 @@ All applications created with MATLAB Compiler use [MATLAB Compiler Runtime™ (M
 on OSG Connect. 
 
 Although the compiled binaries are portable, they need to have a compatible, OS-specific matlab runtime to interpret the binary. We recommend the 
-compilation of your matlab program against matlab versions that match the OSG modules (or [containers](https://portal.osg-htc.org/documentation/htc_workloads/using_software/available-containers-list/), with the compilation executed on a server with 
-Scientific Linux version 7 so that the compiled binaries are portable on OSG machines.
+compilation of your matlab program against matlab versions that match the OSG [containers](https://portal.osg-htc.org/documentation/htc_workloads/using_software/available-containers-list/), with the compilation executed on a server with 
+Scientific Linux so that the compiled binaries are portable on OSG machines.
 
 In this tutorial, we learn the basics of compiling MATLAB programs on a licensed linux machine and running the 
-compiled binaries using a matlab compiled runtime (MCR) in the OSG modules or containers. 
+compiled binaries using a matlab compiled runtime (MCR) in the OSG containers. 
 
 
 ### MATLAB script: `hello_world.m` 
@@ -46,17 +46,7 @@ The file `hello_world` is the standalone executable. The file `run_hello_world.s
 
 ## Running standalone binary applications on OSG
 
-To see which releases are available on OSG:
-
-    $ ssh username@login.osgconnect.net   # login on OSG connect login node
-    $ module spider matlab
-
-    -------------------------------------------------------
-     matlab: matlab/R2018b
-    -------------------------------------------------------
-
-    This module can be loaded directly: module load matlab/R2018b
-
+To see which releases are available on OSG visit our available [containers](https://portal.osg-htc.org/documentation/htc_workloads/using_software/available-contaners-list/) page :
 
 ### Tutorial files
 
@@ -76,48 +66,38 @@ This will create a directory `tutorial-matlab-HelloWorld`. Inside the directory,
 
 The compilation and execution environment need to the same. The file `hello_world` is a standalone binary of the matlab program `hello_world.m` which was compiled using MATLAB 2018b on a Linux platform. The login node and many of the worker nodes on OSG are based on Linux platform. In addition to the platform requirement, we also need to have the same MATLAB Runtime version. 
 
-Load the MATLAB runtime for 2018b version via module command.  On the terminal prompt, type
+Load the MATLAB runtime for 2018b version via apptainer/singularity command.  On the terminal prompt, type
 
-    $ module load matlab/R2018b
+    $ apptainer shell /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-matlab-runtime:R2018b
 
 The above command sets up the environment to run the matlab/2018b runtime applications.  Now execute the binary
 
-    $ ./hello_world
+    $apptainer/singularity> ./hello_world
     (would produce the following output)
 
     =============
     Hello, World!
     =============
 
-If you get the above output, the binary execution is successful. Next, we see how to submit the job on a remote execute point using HTcondor. 
+If you get the above output, the binary execution is successful. Now, exit from the apptainer/singularity environment typing `exit`. Next, we see how to submit the job on a remote execute point using HTcondor. 
 
 ### Job execution and submission files
 
 Let us take a look at `hello_world.submit` file: 
 
 
-    Universe = vanilla                          # One OSG Connect vanilla, the preffered job universe is "vanilla"
-
-    Executable =  hello_world.sh                # Job execution file which is transfered to execute point
-    transfer_input_files = hello_world          # list of file(s) need be transffered to the remote execute point 
+    universe = vanilla                          # One OSG Connect vanilla, the preffered job universe is "vanilla"
+    +SingularityImage = "/cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-matlab-runtime:R2018b"
+    
+    executable =  hello_world                
 
     Output = Log/job.$(Process).out⋅            # standard output 
     Error =  Log/job.$(Process).err             # standard error
     Log =    Log/job.$(Process).log             # log information about job execution
     
-    requirements = OSGVO_OS_STRING == "RHEL 7" && Arch == "X86_64" && HAS_MODULES == True 
+    requirements = HAS_SINGULARITY == TRUE 
     queue 10                                     # Submit 10  jobs
 
-
-The wrapper script `hello_world.sh`  
-
-    #!/bin/bash
-    set -e
-    module load matlab/R2018b
-    chmod +x hello_world
-    ./hello_world
-
-loads the correct matlab module and executes the binary. If you are using an OSG-supported Matlab [container](https://portal.osg-htc.org/documentation/htc_workloads/using_software/available-containers-list/), you don't need the `module load` command.
 
 Before we submit the job, make sure that the directory `Log` exists on the current working directory. Because HTcondor looks for `Log` directory to copy the standard output, error and log files as specified in the job description file. 
 
