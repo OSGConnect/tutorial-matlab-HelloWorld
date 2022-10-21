@@ -14,7 +14,7 @@ All applications created with MATLAB Compiler use [MATLAB Compiler Runtime™ (M
 on OSG Connect. 
 
 Although the compiled binaries are portable, they need to have a compatible, OS-specific matlab runtime to interpret the binary. We recommend the 
-compilation of your matlab program against matlab versions that match the OSG modules (or [containers](https://support.opensciencegrid.org/support/solutions/articles/12000073449-available-containers-list), with the compilation executed on a server with 
+compilation of your matlab program against matlab versions that match the OSG modules (or [containers](https://portal.osg-htc.org/documentation/htc_workloads/using_software/available-containers-list/), with the compilation executed on a server with 
 Scientific Linux version 7 so that the compiled binaries are portable on OSG machines.
 
 In this tutorial, we learn the basics of compiling MATLAB programs on a licensed linux machine and running the 
@@ -117,7 +117,7 @@ The wrapper script `hello_world.sh`
     chmod +x hello_world
     ./hello_world
 
-loads the correct matlab module and executes the binary. If you are using an OSG-supported Matlab [container](https://support.opensciencegrid.org/support/solutions/articles/12000073449-available-containers-list), you don't need the `module load` command.
+loads the correct matlab module and executes the binary. If you are using an OSG-supported Matlab [container](https://portal.osg-htc.org/documentation/htc_workloads/using_software/available-containers-list/), you don't need the `module load` command.
 
 Before we submit the job, make sure that the directory `Log` exists on the current working directory. Because HTcondor looks for `Log` directory to copy the standard output, error and log files as specified in the job description file. 
 
@@ -148,4 +148,4 @@ Sure, it is not very exciting to print the same message on 10 output files. In t
 examples,  we see  how to scale up MATLAB computation on HTC environment. 
 
 ## Getting help
-For assistance or questions, please email the OSG User Support team  at [support@opensciencegrid.org](mailto:support@opensciencegrid.org) or visit the [help desk and community forums](http://support.opensciencegrid.org).
+For assistance or questions, please email the OSG User Support team  at [support@osg-htc.org](mailto:support@osg-htc.org) or visit the [help desk and community forums](https://portal.osg-htc.org/documentation/).
