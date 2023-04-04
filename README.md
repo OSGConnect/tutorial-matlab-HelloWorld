@@ -50,10 +50,9 @@ To see which releases are available on OSG visit our available [containers](http
 
 ### Tutorial files
 
-Let us say you have created the standalone binary `hello_world`. Transfer the file `hello_world` to login.osgconnect.net. Alternatively, you may also use the readily available files by invoking the `tutorial` command: 
+Let us say you have created the standalone binary `hello_world`. Transfer the file `hello_world` to your Access Point. Alternatively, you may also use the readily available files by using the `git clone` command: 
 
-
-    $ tutorial matlab-HelloWorld # Copies input and script files to the directory tutorial-matlab-HelloWorld.
+    $ git clone https://github.com/OSGConnect/tutorial-matlab-HelloWorld # Copies input and script files to the directory tutorial-matlab-HelloWorld.
  
 This will create a directory `tutorial-matlab-HelloWorld`. Inside the directory, you will see the following files
    
@@ -64,7 +63,7 @@ This will create a directory `tutorial-matlab-HelloWorld`. Inside the directory,
 
 ### Executing the MATLAB application binary
 
-The compilation and execution environment need to the same. The file `hello_world` is a standalone binary of the matlab program `hello_world.m` which was compiled using MATLAB 2018b on a Linux platform. The login node and many of the worker nodes on OSG are based on Linux platform. In addition to the platform requirement, we also need to have the same MATLAB Runtime version. 
+The compilation and execution environment need to the same. The file `hello_world` is a standalone binary of the matlab program `hello_world.m` which was compiled using MATLAB 2018b on a Linux platform. The Access Point and many of the worker nodes on OSG are based on Linux platform. In addition to the platform requirement, we also need to have the same MATLAB Runtime version. 
 
 Load the MATLAB runtime for 2018b version via apptainer/singularity command.  On the terminal prompt, type
 
