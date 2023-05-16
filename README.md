@@ -10,8 +10,8 @@ interfaces. For more details, check the list of [supported toolboxes](http://www
 and [ineligible programs](http://www.mathworks.com/products/ineligible_programs/).  
 
 
-All applications created with MATLAB Compiler use [MATLAB Compiler Runtime™ (MCR)](http://www.mathworks.com/products/compiler/mcr/), which enables royalty-free deployment and use. We assume you have access to a server that has MATLAB compiler because the compiler is not available on OSG Connect.  MATLAB Runtime is available 
-on OSG Connect. 
+All applications created with MATLAB Compiler use [MATLAB Compiler Runtime™ (MCR)](http://www.mathworks.com/products/compiler/mcr/), which enables royalty-free deployment and use. We assume you have access to a server that has MATLAB compiler because the compiler is not available on the OSPool.  MATLAB Runtime is available 
+on OSPool. 
 
 Although the compiled binaries are portable, they need to have a compatible, OS-specific matlab runtime to interpret the binary. We recommend the 
 compilation of your matlab program against matlab versions that match the OSG [containers](https://portal.osg-htc.org/documentation/htc_workloads/using_software/available-containers-list/), with the compilation executed on a server with 
@@ -33,7 +33,7 @@ Lets start with a simple MATLAB script `hello_world.m` that prints `Hello World!
 
 ### Compilation 
 
-*OSG connect does not have a license to use the MATLAB compiler*. On a Linux server with a MATLAB 
+*The machines on the OSPool does not have a license to use the MATLAB compiler*. On a Linux server with a MATLAB 
 license, invoke the compiler `mcc`.  We turn off all graphical options (`-nodisplay`), disable Java (`-nojvm`), and instruct MATLAB to run this application as a single-threaded application (`-singleCompThread`):
 
     mcc -m -R -singleCompThread -R -nodisplay -R -nojvm hello_world.m
@@ -84,8 +84,6 @@ If you get the above output, the binary execution is successful. Now, exit from 
 
 Let us take a look at `hello_world.submit` file: 
 
-
-    universe = vanilla                          # One OSG Connect vanilla, the preffered job universe is "vanilla"
     +SingularityImage = "/cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-matlab-runtime:R2018b"
     
     executable =  hello_world                
@@ -94,11 +92,12 @@ Let us take a look at `hello_world.submit` file:
     Error =  Log/job.$(Process).err             # standard error
     Log =    Log/job.$(Process).log             # log information about job execution
     
-    requirements = HAS_SINGULARITY == TRUE 
-    queue 10                                     # Submit 10  jobs
+    +JobDurationCategory = "Medium"
+    
+    queue 10                                     # Submit 10 jobs
 
 
-Before we submit the job, make sure that the directory `Log` exists on the current working directory. Because HTcondor looks for `Log` directory to copy the standard output, error and log files as specified in the job description file. 
+Before we submit the job, make sure that the directory `Log` exists on the current working directory. Because HTCondor looks for `Log` directory to copy the standard output, error and log files as specified in the job description file. 
 
 From your work directory, type
 
@@ -110,7 +109,7 @@ Absence of `Log` directory would send the jobs to held state.
 
 We submit the job using the `condor_submit` command as follows
 
-	$ condor_submit hello_world.submit //Submit the condor job description file "hello_world.submit"
+	$ condor_submit hello_world.submit  #Submit the condor job description file "hello_world.submit"
 
 Now you have submitted an ensemble of 10 MATLAB jobs. Each job prints `hello world` on the standard 
 output. Check the status of the submitted job,  
