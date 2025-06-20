@@ -85,8 +85,7 @@ If you get the above output, the binary execution is successful. Now, exit from 
 Let us take a look at `hello_world.submit` file: 
 
 
-    universe = vanilla                          # One OSG Connect vanilla, the preffered job universe is "vanilla"
-    +SingularityImage = "/cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-matlab-runtime:R2018b"
+    container_image = /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-matlab-runtime:R2018b
     
     executable =  hello_world                
 

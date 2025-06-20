@@ -1,5 +1,4 @@
-universe = vanilla
-+SingularityImage = "/cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-matlab-runtime:R2018b"
+container_image = /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-matlab-runtime:R2018b
 
 executable =  hello_world
 
